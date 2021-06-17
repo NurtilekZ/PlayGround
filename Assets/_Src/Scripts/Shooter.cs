@@ -8,16 +8,20 @@ namespace _Src.Scripts
         public AudioClip shootSound;
         public float delayTime = 0.5f;
         public bool isReloading;
-        public ParticleSystem muzzleFlash;
+        public GameObject muzzleFlash;
 
         public void Shoot(Transform aimTransform)
         {
-            muzzleFlash.Play();
             AudioSource.PlayClipAtPoint(shootSound, aimTransform.position);
             Bullet bullet = ammo.FireBullet();
             bullet.transform.position = aimTransform.position;
             bullet.transform.rotation = aimTransform.rotation;
             bullet.gameObject.SetActive(true);
+        }
+
+        public void Muzzle(bool value)
+        {
+            muzzleFlash.SetActive(value);
         }
 
         public void Reload()

@@ -1,4 +1,6 @@
-﻿public interface IDamagable
+﻿using System.Collections;
+
+public interface IDamagable
 {
-    void TakeDamage();
+    IEnumerator TakeDamage();
 }
