@@ -12,9 +12,9 @@ namespace _Src.Scripts
     {
         public LayerMask aimLayerMask;
         public RigBuilder rigBuilder;
-        public MultiAimConstraint weaponAimRig;
         public float maxTargetDistance;
         public Transform targetTransform;
+        public RectTransform targetImage;
         public Transform aimTransform;
         public Vector3 movementDirection;
         public Vector3 rotationDirection;
@@ -69,7 +69,6 @@ namespace _Src.Scripts
                 }
 
             };
-            _playerInput.Player.Rotation.canceled += ctx => rotationDirection = transform.forward;
         
             _playerInput.Player.Shoot.performed += ctx => StartCoroutine(Shoot());
         }
@@ -143,6 +142,7 @@ namespace _Src.Scripts
         private void MoveTarget()
         {
             targetTransform.position = rotationDirection;
+            targetImage.position = _mainCamera.WorldToScreenPoint(targetTransform.position);
             Vector3.ClampMagnitude(targetTransform.position, maxTargetDistance);
 
             Vector3 targetDirection = targetTransform.position - transform.position;

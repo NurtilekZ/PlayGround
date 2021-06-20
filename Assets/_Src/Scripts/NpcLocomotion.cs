@@ -7,24 +7,24 @@ namespace _Src.Scripts
     [RequireComponent(typeof(NavMeshAgent))]
     public class NpcLocomotion : MonoBehaviour, IDamagable
     {
-        public NavMeshAgent navMeshAgent;
-        public Transform target;
-        public Renderer renderer;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
+        [SerializeField] private Transform _target;
+        [SerializeField] private Renderer _renderer;
 
         private void Awake()
         {
-            navMeshAgent = GetComponent<NavMeshAgent>();
-            renderer = GetComponent<Renderer>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _renderer = GetComponent<Renderer>();
         }
 
         private void Update()
         {
-            navMeshAgent.SetDestination(target.position);
+            _navMeshAgent.SetDestination(_target.position);
         }
 
         public IEnumerator TakeDamage()
         {
-            var material = renderer.material;
+            var material = _renderer.material;
             material.color = Color.red;
             yield return new WaitForSeconds(0.01f);
             material.color = Color.white;
